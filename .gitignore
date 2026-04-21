@@ -1,0 +1,14 @@
+# Go binaries
+/bin/
+# Build directories
+*/build/
+# Compiled Object files
+*.o
+# C++ compiled files
+*.out
+# Executable files
+*.exe
+# Go binaries
+corretor
+# Vendor directory
+/vendor/
