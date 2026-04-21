@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  corretor1:
+    build: .
+    container_name: corretor1
+    environment:
+      - BROKER_ID=corretor-001
+      - PORT_TCP=:9000
+      - PORT_UDP=:9001
+      - PEERS=corretor-002,corretor2:9000,corretor2:9001,corretor-003,corretor3:9000,corretor3:9001
+    ports:
+      - "9000:9000"
+      - "9001:9001/udp"
+    networks:
+      - rede-corretores
+    volumes:
+      - dados-corretor1:/tmp
+
+  corretor2:
+    build: .
+    container_name: corretor2
+    environment:
+      - BROKER_ID=corretor-002
+      - PORT_TCP=:9000
+      - PORT_UDP=:9001
+      - PEERS=corretor-001,corretor1:9000,corretor1:9001,corretor-003,corretor3:9000,corretor3:9001
+    ports:
+      - "9002:9000"
+      - "9003:9001/udp"
+    networks:
+      - rede-corretores
+    volumes:
+      - dados-corretor2:/tmp
+
+  corretor3:
+    build: .
+    container_name: corretor3
+    environment:
+      - BROKER_ID=corretor-003
+      - PORT_TCP=:9000
+      - PORT_UDP=:9001
+      - PEERS=corretor-001,corretor1:9000,corretor1:9001,corretor-002,corretor2:9000,corretor2:9001
+    ports:
+      - "9004:9000"
+      - "9005:9001/udp"
+    networks:
+      - rede-corretores
+    volumes:
+      - dados-corretor3:/tmp
+
+networks:
+  rede-corretores:
+    driver: bridge
+
+volumes:
+  dados-corretor1:
+  dados-corretor2:
+  dados-corretor3:

@@ -1,0 +1,16 @@
+{
+    // Remova ou comente estas linhas:
+    // "go.alternateTools": {
+    //     "go": "/snap/bin/go"
+    // },
+    // "go.gopath": "/home/welton/go",
+    // "go.goroot": "/snap/go/11127",
+    
+    "go.useLanguageServer": true,
+    "gopls": {
+        "ui.completion.usePlaceholders": true,
+        "ui.diagnostic.analyses": {
+            "composites": false
+        }
+    }
+}
